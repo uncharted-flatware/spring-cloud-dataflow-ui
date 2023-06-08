@@ -34,7 +34,7 @@ jobs:
 
       - name: Build Targets
         run: |
-          ./build_targets.sh
+          ./make_targets.sh
 
       - name: Generate Configuration
         run: |
