@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {Utils} from '../../../flo/stream/support/utils';
 import {StreamFloCreateComponent} from '../../../flo/stream/component/create.component';
@@ -34,11 +34,13 @@ export class CreateComponent implements OnInit {
   dependencies: Map<number, Array<number>>;
   progressData: ProgressData;
   operationRunning = '';
+  seedDslText: string;
 
   // flo
   @ViewChild('flo', {static: true}) flo: StreamFloCreateComponent;
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private router: Router,
     private parserService: ParserService,
     private streamService: StreamService,
@@ -48,6 +50,13 @@ export class CreateComponent implements OnInit {
     private translate: TranslateService
   ) {
     this.form = this.fb.group({}, this.uniqueStreamNames());
+    const dslKey = this.activatedRoute.snapshot.queryParams['dslKey']||null;
+    if (dslKey !== null) {
+      const originalDslText = window.localStorage.getItem(dslKey);
+      if (originalDslText) {
+        this.seedDslText = originalDslText;
+      }
+    }
   }
 
   getStreams(): Array<any> {
@@ -56,6 +65,9 @@ export class CreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.streams = [];
+    if (this.seedDslText) {
+      this.flo.dsl = this.seedDslText;
+    }
   }
 
   back(): void {
