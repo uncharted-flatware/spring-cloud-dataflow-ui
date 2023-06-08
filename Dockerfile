@@ -4,5 +4,6 @@ FROM nginx:1.23-alpine
 RUN apk update
 RUN apk add --no-cache curl && apk add --no-cache bash && apk add --no-cache vim
 
-COPY ./default.conf /etc/nginx/conf.d/
-COPY ./ui/dist /var/www
+COPY proxy.conf /etc/nginx/
+COPY default.conf /etc/nginx/conf.d/
+COPY ./target/classes/public/dashboard /var/www/dashboard

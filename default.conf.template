@@ -32,13 +32,3 @@ server {
     expires 0;
   }
 
-  location ~ ^/(about|apps|audit-records|authenticate|completions|dashboard/logout|jobs|login|logout|metrics|oauth2|runtime|security/info|streams|tasks|tools|websocket)/ {
-    proxy_pass http://java/;
-    proxy_set_header Host $http_host;
-    proxy_pass_request_headers  on;
-    proxy_connect_timeout       300;
-    proxy_send_timeout          300;
-    proxy_read_timeout          300;
-    send_timeout                300;
-  }
-}
