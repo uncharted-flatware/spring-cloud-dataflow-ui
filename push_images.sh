@@ -1,0 +1,2 @@
+VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
+docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/unchartedsoftware/spring-cloud-dataflow-ui:"$VERSION" . --push

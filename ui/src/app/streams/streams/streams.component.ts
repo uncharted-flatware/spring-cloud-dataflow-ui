@@ -17,6 +17,8 @@ import {ScaleComponent} from './scale/scale.component';
 import {NotificationService} from '../../shared/service/notification.service';
 import {TranslateService} from '@ngx-translate/core';
 
+import {v4 as uuidv4} from 'uuid';
+
 @Component({
   selector: 'app-streams-list',
   templateUrl: './streams.component.html'
@@ -125,6 +127,12 @@ export class StreamsComponent extends DatagridComponent implements OnDestroy, On
 
   clone(streams: Stream[]): void {
     this.cloneModal.open(streams);
+  }
+
+  createFrom(streams: Stream[]): void {
+    const key = uuidv4();
+    window.localStorage.setItem(key, streams[0].dslText);
+    this.router.navigate(['streams/list/create'], { queryParams: { dslKey: key} });
   }
 
   create(): void {

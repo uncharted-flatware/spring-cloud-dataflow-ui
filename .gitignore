@@ -57,3 +57,5 @@ ui/.vscode/*
 ui/cypress/videos
 ui/cypress/downloads
 ui/cypress/screenshots
+
+default.conf

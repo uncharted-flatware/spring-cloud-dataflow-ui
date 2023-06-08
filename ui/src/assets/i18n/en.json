@@ -28,6 +28,7 @@
     "launch": "Launch",
     "schedule": "Schedule",
     "scaleInstance": "Scale instance(s)",
+    "createFrom": "Create Stream from",
     "description": "Description",
     "status": "Status",
     "clone": "Clone",
