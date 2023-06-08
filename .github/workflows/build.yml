@@ -46,5 +46,4 @@ jobs:
 
       - name: Push Docker image
         run: |
-          cd docker
           ./push_images.sh
